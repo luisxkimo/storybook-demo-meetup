@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
+import { withState, withHandlers, compose } from 'recompose'
 import './dropdown.scss'
 
-const Dropdown = props => {
+const DropdownRecompose = props => {
   const {
     children,
-    onButtonClick,
+    toggleDropdown,
     isClosed,
     buttonText,
     typeWidth
@@ -16,7 +17,7 @@ const Dropdown = props => {
 
   return (
     <div className={`dropdown dropdown--${typeWidth} ${conditionalClass}`}>
-      <button className="dropdown__button" onClick={onButtonClick}>
+      <button className="dropdown__button" onClick={toggleDropdown}>
         <span className="dropdown__button__text">{buttonText}</span>
       </button>
       <div className="dropdown__content">
@@ -26,16 +27,25 @@ const Dropdown = props => {
   )
 }
 
-Dropdown.propTypes = {
-  onButtonClick: PropTypes.func,
+DropdownRecompose.propTypes = {
+  toggleDropdown: PropTypes.func,
   isClosed: PropTypes.bool,
   buttonText: PropTypes.string,
   typeWidth: PropTypes.string
 }
 
-Dropdown.defaultProps = {
+DropdownRecompose.defaultProps = {
   isClosed: true,
   typeWidth: 'medium'
 }
 
-export default Dropdown
+const decorator = compose(
+  withState('isClosed', 'setIsClosed', true),
+  withHandlers({
+    toggleDropdown: props => () => {
+      props.setIsClosed(!props.isClosed)
+    }
+  })
+)
+
+export default decorator(DropdownRecompose)
