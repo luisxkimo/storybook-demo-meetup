@@ -1,0 +1,120 @@
+body {
+  background-color: #fafafa;
+}
+
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+
+  &--small {
+    max-width: 200px;
+  }
+
+  &--medium {
+    max-width: 360px;
+  }
+
+  &--large {
+    max-width: none;
+  }
+
+  &--closed {
+    .dropdown__button {
+      &::after {
+        transform: translateY(-50%) rotate(0);
+      }
+    }
+
+    .dropdown__content {
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0),
+                  0 2px 4px rgba(0, 0, 0, 0);
+      transform: scaleY(0);
+      transition: transform 0.4s ease 0.4s, box-shadow 0.4s 0.4s;
+    }
+
+    .dropdown__content__wrapper {
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+  }
+
+  &__button,
+  &__content {
+    display: block;
+    position: relative;
+    text-align: left;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.16),
+                0 2px 4px rgba(0, 0, 0, 0.16);
+    overflow: hidden;
+  }
+
+  &__button {
+    padding: 8px 16px;
+    border: 0;
+    cursor: pointer;
+    box-sizing: border-box;
+    outline: 0;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 50%;
+      right: 16px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 6px 6px 0 6px;
+      border-color: #1a1a1a transparent transparent transparent;
+      transform: translateY(-50%) rotate(-180deg);
+      transition: transform 0.4s ease;
+    }
+
+    + .dropdown__content {
+      margin-top: 8px;
+    }
+  }
+
+  &__button__text {
+    font-family: system-ui, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+  }
+
+  &__content {
+    transform: scaleY(1);
+    transform-origin: top;
+    transition: transform 0.4s ease, box-shadow 0.4s;
+  }
+
+  &__content__wrapper {
+    padding: 8px 0;
+    box-sizing: border-box;
+    opacity: 1;
+    transition: opacity 0.4s ease 0.4s;
+
+    p {
+      display: block;
+      position: relative;
+      margin: 0;
+      padding: 8px 16px;
+      font-family: system-ui, sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #1a1a1a;
+      background-color: #fff;
+      box-sizing: border-box;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: #ededed;
+      }
+    }
+  }
+}
