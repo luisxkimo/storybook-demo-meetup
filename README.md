@@ -12,6 +12,6 @@ yarn install
 Para lanzarla, utiliza:
 
 ```
-yarn install
+yarn storybook
 ```
 Esperamos que te sea útil, que la disfrutes ❤️
